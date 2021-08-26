@@ -1,0 +1,50 @@
+﻿@model IEnumerable<GP_EMR_Project.Models.User>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    GP_EMR_Project.Models.EMR_GP_DBEntities db = new GP_EMR_Project.Models.EMR_GP_DBEntities();
+}
+
+<!-- start carousel -->
+
+<div id="carouselExampleSlidesOnly" class="carousel slide container" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/Content/MainPageBootstrap/pic/WeCare-Logo-V2_150ppi.png" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/Content/MainPageBootstrap/pic/allathomehealthcare-org2.png" alt="Second slide">
+        </div>
+    </div>
+    <hr />
+</div>
+
+<!-- end carousel -->
+<!-- start carousel -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center text-success"><h3>The Best Doctors</h3></div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="owl-carousel owl-theme">
+            @Html.Partial("Partial_Doctors", db.Doctors.ToList().OrderByDescending(model => model.Medium_Rate))
+        </div>
+    </div>
+</div>
+
+<br />
+
+<!-- end carousel -->
+<div class="content text-center ">
+    <div class="container">
+        <h1><span>The Highest Rated</span> Hospitals</h1>
+        <div class="row">
+            @Html.Partial("Partial_Medical_Organizations", db.Medical_Organization.ToList().OrderByDescending(model => model.Medium_Rate))
+        </div>
+    </div>
+</div>
